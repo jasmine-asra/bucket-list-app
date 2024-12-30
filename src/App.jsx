@@ -106,16 +106,23 @@ export default function App() {
           justifyContent="center"
           alignItems="center"
           direction="column"
-          width="70%"
-          margin="0 auto"
+          maxWidth="1200px"
+          padding="2rem"
+          backgroundColor="#f9fafc"
+          borderRadius="12px"
+          boxShadow="0 4px 6px rgba(0, 0, 0, 0.1)"
         >
-          <Heading level={1}>My Bucket List</Heading>
-          <View as="form" margin="3rem 0" onSubmit={createItem}>
+          <Heading level={1} color="#2c3e50" marginBottom="1rem">
+            My Bucket List
+          </Heading>
+          <View as="form" margin="2rem 0" onSubmit={createItem}>
             <Flex
               direction="column"
-              justifyContent="center"
-              gap="2rem"
-              padding="2rem"
+              gap="1.5rem"
+              padding="1.5rem"
+              backgroundColor="#ffffff"
+              borderRadius="12px"
+              boxShadow="0 2px 4px rgba(0, 0, 0, 0.1)"
             >
               <TextField
                 name="title"
@@ -124,6 +131,7 @@ export default function App() {
                 labelHidden
                 variation="quiet"
                 required
+                size="large"
               />
               <TextField
                 name="description"
@@ -132,29 +140,31 @@ export default function App() {
                 labelHidden
                 variation="quiet"
                 required
+                size="large"
               />
               <View
                 name="image"
                 as="input"
                 type="file"
-                alignSelf={"end"}
+                alignSelf={"center"}
                 accept="image/png, image/jpeg"
+                style={{ marginTop: "1rem", fontSize: "1rem" }}
               />
-
-
-              <Button type="submit" variation="primary">
+              <Button type="submit" variation="primary" size="large">
                 Add to Bucket List
               </Button>
             </Flex>
           </View>
           <Divider />
-          <Heading level={2}>My Bucket List Items</Heading>
+          <Heading level={2} color="#34495e" margin="2rem 0">
+            My Bucket List Items
+          </Heading>
           <Grid
-            margin="3rem 0"
-            autoFlow="column"
+            templateColumns="repeat(auto-fit, minmax(300px, 1fr))"
+            gap="1.5rem"
             justifyContent="center"
-            gap="2rem"
-            alignContent="center"
+            alignItems="center"
+            width="100%"
           >
             {items.map((item) => (
               <Flex
@@ -162,35 +172,55 @@ export default function App() {
                 direction="column"
                 justifyContent="center"
                 alignItems="center"
-                gap="2rem"
-                border="1px solid #ccc"
-                padding="2rem"
-                borderRadius="5%"
-                className="box"
+                gap="1rem"
+                padding="1.5rem"
+                backgroundColor="#ffffff"
+                borderRadius="10px"
+                boxShadow="0 2px 6px rgba(0, 0, 0, 0.1)"
+                style={{
+                  maxWidth: "300px",
+                  margin: "0 auto",
+                  textAlign: "center",
+                }}
               >
-                <View>
-                  <Heading level="3">{item.title}</Heading>
-                </View>
-                <Text fontStyle="italic">{item.description}</Text>
+                <Heading level="3" color="#2c3e50" fontSize="1.2rem">
+                  {item.title}
+                </Heading>
+                <Text fontStyle="italic" color="#7f8c8d" fontSize="1rem">
+                  {item.description}
+                </Text>
                 {item.image && (
                   <Image
                     src={item.image}
                     alt={`Visual for ${item.title}`}
-                    style={{ width: 400 }}
+                    style={{
+                      width: "100%",
+                      height: "auto",
+                      borderRadius: "8px",
+                    }}
                   />
                 )}
                 <Button
                   variation="destructive"
+                  size="small"
                   onClick={() => deleteItem(item)}
+                  style={{ fontSize: "0.9rem", padding: "0.5rem 1rem" }}
                 >
                   Delete Item
                 </Button>
               </Flex>
             ))}
           </Grid>
-          <Button onClick={signOut}>Sign Out</Button>
+          <Button
+            onClick={signOut}
+            marginTop="2rem"
+            size="large"
+            variation="primary"
+          >
+            Sign Out
+          </Button>
         </Flex>
       )}
     </Authenticator>
-  );
+  );  
 }
